@@ -1,0 +1,20 @@
+<% include partials/header %>
+
+<h1>Serie Details</h1>
+
+<h2><%=serie.name%></h2>
+
+<img src="https://image.tmdb.org/t/p/w300<%= serie.poster_path %>" style="float:left">
+
+<p><%=serie.overview%></p>
+
+<div class="container">
+    <% serie["seasons"].forEach(function(serie){ %>
+    <div class="display-result">
+        <h4><%= serie["season_number"] %> (<%= serie["air_date"] %>)</h4>
+            <img src="https://image.tmdb.org/t/p/w185<%= serie["poster_path"] %>">
+    </div>
+    <% }) %>
+</div>
+
+<% include partials/footer %>

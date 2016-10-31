@@ -1,0 +1,16 @@
+<% include partials/header %>
+
+<h1>Search Result</h1>
+
+<div class="container">
+	<% series["results"].forEach(function(serie){ %>
+		<div class="display-result">
+			<h2><%= serie["name"] %> (<%= serie["first_air_date"] %>)</h2>
+			<a href="/serie/<%= serie["id"] %>">
+			<img src="https://image.tmdb.org/t/p/w500<%= serie["poster_path"] %>">
+			</a>
+		</div>
+	<% }) %>
+</div>
+
+<% include partials/footer %>
