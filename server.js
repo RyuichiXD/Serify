@@ -1,29 +1,6 @@
 var express = require("express");
-var bodyParser = require('body-parser');
-var request = require("request");
-var users = require('./route/users');
-var mongoose = require('mongoose');
-
 var app = express();
-
-//use to get get/post request as object
-app.use(bodyParser());
-
-// Database
-var databasename = "test"
-
-// if errors occur while connection
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-    console.log("connected to database "+ databasename)// we're connected!
-});
-
-//connect to database (mongod should be already running)
-mongoose.connect('mongodb://localhost/'+databasename);
-
-//routing
-app.use('/login',users);
+var request = require("request");
 
 // Serve public dir
 app.use(express.static("public"));
@@ -34,8 +11,6 @@ app.set("view engine", "ejs");
 app.get("/", function(req, res){
     res.render("home");
 });
-
-
 
 // Display search results
 app.get("/search", function(req, res){
