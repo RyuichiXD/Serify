@@ -6,27 +6,28 @@ var mongoose = require('mongoose');
 
 var app = express();
 
-//use to get get/post request as object
+//use to get get/post request as an object
 app.use(bodyParser());
 
 // Database
-var databasename = "test"
+var databasename = "profiles"
 
 // if errors occur while connection
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
-    console.log("connected to database "+ databasename)// we're connected!
+    console.log("connected to database "+ databasename); // we're connected!
 });
 
 //connect to database (mongod should be already running)
 mongoose.connect('mongodb://localhost/'+databasename);
 
+// Serve public dir
+app.use(express.static("public"));
+
 //routing
 app.use('/login',users);
 
-// Serve public dir
-app.use(express.static("public"));
 // Set view engine ejs so that wont need to type .ejs extension
 app.set("view engine", "ejs");
 
@@ -34,7 +35,6 @@ app.set("view engine", "ejs");
 app.get("/", function(req, res){
     res.render("home");
 });
-
 
 
 // Display search results

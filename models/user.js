@@ -14,19 +14,10 @@ var userSchema = new mongoose.Schema({
 });
 
 // Let mongoose know about the new Schema
-var User = mongoose.model('User', userSchema);
+var User = mongoose.model('users', userSchema);
+
+exports.user = User;
 
 
-//
-// // add something
-// var thor = new User({
-//     title: 'Thor'
-//     , rating: 'PG-13'
-//     , releaseYear: '2011'  // Notice the use of a String rather than a Number - Mongoose will automatically convert this for us.
-//     , hasCreditCookie: true
-// });
-//
-// thor.save(function(err, thor) {
-//     if (err) return console.error(err);
-//     console.dir(thor);
-// });
+// todo Session key ? Clemens fragen
+

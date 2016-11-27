@@ -1,29 +1,55 @@
 /**
  * Created by Samy on 06.11.2016.
  */
-require('../models/user');
+var schema = require('../models/user');
 
 var mongoose = require('mongoose');
-var User = mongoose.model("User");
+var User = schema.user;
 
 
 
 //Add User in db
 //if post is used in form, this function is going to execute
 exports.post = function (req,res) {
-    console.log("geadded")
-    var user = new User(req.body);
-    user.save();
-    res.jsonp(user);
+    User.find({$or:[ {email: req.body.email}, {username: req.body.username}]},function (err,user) {
+        if (err)
+        {
+            console.log("Fehler beim finden des users "+ err);
+        }
+        //check if email or username in database
+        if(!user.length)
+        {
+            var user = new User(req.body);
+            user.save();
+            res.jsonp(user);
+            console.log(req.body.username+" geadded");
+
+        }
+        else
+        {
+            console.log("Profil exisistert bereits");
+            console.log(req.body);
+        }
+    })
+
 }
 
 //Check if user exist
 exports.check = function (req,res) {
     console.log("check user-login")
-    User.find({ username: 'Ryuichi001', password: '121212'},function (err,user) {
-        if (err) throw err;
+    User.find({ email: req.body.email, password: req.body.password},function (err,user) {
+        if (err)
+        {
+            console.log("Fehler beim finden des users "+ err);
+        }
 
-        //if found
-        console.log(user + " success");
+        if(!user.length)
+        {
+            console.log("Profil nicht gefunden");
+        }
+        else
+        {
+            console.log("Profil gefunden");
+        }
     })
 }
