@@ -62,7 +62,6 @@ app.get("/serie/:serien_id", function(req, res){
     });
 });
 
-
 // Start listening to server
 app.listen(3000, function(){
     console.log("The server has started on port 3000");

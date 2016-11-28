@@ -1,0 +1,15 @@
+<% include partials/header %>
+<script type="text/javascript">
+    window.alert("Logged in");
+</script>
+
+<div class="search-form">
+    <h1>Dahsboard</h1>
+
+    <form action="/search" method="GET">
+        <input type="text" name="title" placeholder="Search...."><br>
+        <button>Search</button>
+    </form>
+</div>
+
+<% include partials/footer %>

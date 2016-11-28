@@ -8,7 +8,9 @@ router.get("/", function(req, res){
 });
 
 // check if username and password is right
-router.post('/check', users.check);
+router.post('/check', function(req, res) {
+    res.render("dashboard");
+});
 
 // add user to db
 router.post('/register', users.post);
