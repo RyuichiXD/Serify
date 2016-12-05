@@ -14,7 +14,7 @@
         <h4><%= serie["season_number"] %> (<%= serie["air_date"] %>)</h4>
 
         <% for(var i = 1; i <= serie.episode_count; i++) { %>
-        <h4>Episode <%= [i] %></h4>
+        <h4>Episode <%= [i] %></h4> <input type="checkbox" name="tracking" value="1">
         <% } %>
 
         <img src="https://image.tmdb.org/t/p/w185<%= serie["poster_path"] %>">
