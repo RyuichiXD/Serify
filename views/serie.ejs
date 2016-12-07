@@ -1,3 +1,6 @@
+<% include partials/head %>
+
+<body>
 <% include partials/header %>
 
 <h1>Serie Details</h1>
@@ -14,7 +17,7 @@
         <h4><%= serie["season_number"] %> (<%= serie["air_date"] %>)</h4>
 
         <% for(var i = 1; i <= serie.episode_count; i++) { %>
-        <h4>Episode <%= [i] %></h4> <input type="checkbox" name="tracking" value="1">
+        <label for="">Episode <%= [i] %></label> <input type="radio" name="tracking" value="1" id="">
         <% } %>
 
         <img src="https://image.tmdb.org/t/p/w185<%= serie["poster_path"] %>">
