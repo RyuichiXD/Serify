@@ -1,12 +1,36 @@
+<% include partials/head %>
+
+<body>
 <% include partials/header %>
 
-<div class="search-form">
-    <h1>Serify</h1>
+<div class="container">
 
-    <form action="/search" method="GET">
-        <input type="text" name="title" placeholder="Search...."><br>
-        <button>Search</button>
-    </form>
+    <div class="search-form">
+
+        <form action="/search" method="GET">
+            <div class="row">
+                <div class="col l11 m11">
+                    <input type="text" name="title" placeholder="Search....">
+                </div>
+                <div class="col l1 m1 ">
+                    <button class="btn waves-effect waves-light">Search
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="row">
+        <% series["results"].forEach(function(serie){ %>
+        <div class="display-result">
+            <h2><%= serie["name"] %> (<%= serie["first_air_date"] %>)</h2>
+            <a href="/serie/<%= serie["id"] %>">
+                <img src="https://image.tmdb.org/t/p/w500<%= serie["poster_path"] %>">
+            </a>
+        </div>
+        <% }) %>
+    </div>
+
 </div>
-
 <% include partials/footer %>
