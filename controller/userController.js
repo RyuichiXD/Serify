@@ -3,7 +3,6 @@
  */
 var schema = require('../models/user');
 
-var mongoose = require('mongoose');
 var User = schema.user;
 
 exports.getLogin = function (req,res) {
