@@ -6,10 +6,13 @@ var schema = require('../models/user');
 var mongoose = require('mongoose');
 var User = schema.user;
 
-
+exports.getLogin = function (req,res) {
+    res.render("login");
+}
 
 //Add User in db
 //if post is used in form, this function is going to execute
+//TODO: add res.render to something(?)
 exports.post = function (req,res) {
     User.find({$or:[ {email: req.body.email}, {username: req.body.username}]},function (err,user) {
         if (err)
@@ -35,6 +38,7 @@ exports.post = function (req,res) {
 }
 
 //Check if user exist
+//TODO: Do something when logged in (res.render Dashbord)
 exports.check = function (req,res) {
     console.log("check user-login")
     User.find({ email: req.body.email, password: req.body.password},function (err,user) {
