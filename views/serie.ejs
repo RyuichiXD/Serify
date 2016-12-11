@@ -3,26 +3,64 @@
 <body>
 <% include partials/header %>
 
-<h1>Serie Details</h1>
+<div class="container-fluid mt">
 
-<h2><%= serie.name %></h2>
+    <div class="row serie-header">
+        <div class="serie-header-bg" style="background-image: url('https://image.tmdb.org/t/p/w1280<%= serie.backdrop_path %>')"></div>
+        <div class="col-xs-12 col-sm-10 serie-header-content">
+            <img src="https://image.tmdb.org/t/p/w342<%= serie.poster_path %>">
+            <h1><%= serie.name %></h1>
+            <p><%= serie.overview %></p>
 
-<img src="https://image.tmdb.org/t/p/w300<%= serie.poster_path %>">
-
-<p><%= serie.overview %></p>
-
-<div class="container">
-    <% serie["seasons"].forEach(function(serie){ %>
-    <div class="display-result">
-        <h4><%= serie["season_number"] %> (<%= serie["air_date"] %>)</h4>
-
-        <% for(var i = 1; i <= serie.episode_count; i++) { %>
-        <label for="">Episode <%= [i] %></label> <input type="radio" name="tracking" value="1" id="">
-        <% } %>
-
-        <img src="https://image.tmdb.org/t/p/w185<%= serie["poster_path"] %>">
+            <strong>Rating: <%= serie.vote_average %></strong><br>
+            <strong>Votes: <%= serie.vote_count %></strong><br>
+            <a href="/login" class="btn btn-slider"><%= serie.genres[0].name %></a>
+        </div>
+        <div class="col-sm-2 serie-header-like">
+            <span class="glyphicon glyphicon-heart"></span>
+        </div>
     </div>
-    <% }) %>
+    <div class="container">
+        <div class="row popular-series">
+            <div class="col-sm-10 col-sm-offset-1 popular-series-box">
+                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                Seasons
+                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+            </div>
+        <div class="col-sm-12 panel-group" id="accordion">
+            <div class="panel">
+                <div class="col-sm-12 owl-carousel">
+                    <% serie["seasons"].forEach(function(season, k){ %>
+                    <div class="series-slide">
+
+                        <a data-toggle="collapse"  data-target="#collapse<%= k %>"  data-parent="#accordion">
+                            <img src="https://image.tmdb.org/t/p/w185<%= season["poster_path"] %>">
+
+                        </a>
+                    </div>
+                    <% }) %>
+                </div>
+
+                <% serie["seasons"].forEach(function(season, k){ %>
+                <div id="collapse<%= k %>" class="col-sm-10 col-sm-offset-1 popular-series-box collapse">
+                    <h2>Season: <%= season["season_number"] %> (<%= season["air_date"] %>)</h2>
+                    <ul class="list-group">
+                        <% for(var i = 1; i <= season.episode_count; i++) { %>
+                        <li class="list-group-item">Episode <%= [i] %></li>
+                        <% } %>
+
+                    </ul>
+                </div>
+
+                <% }) %>
+            </div>
+        </div>
+    </div>
+    </div>
 </div>
 
 <% include partials/footer %>

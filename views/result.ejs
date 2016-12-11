@@ -1,0 +1,23 @@
+<% include partials/head %>
+
+<body>
+<% include partials/header %>
+
+<div class="container mt">
+    <% series["results"].forEach(function(serie){ %>
+    <div class="col-sm-3 col-xs-12 series-slide result">
+        <a href="/serie/<%= serie["id"] %>">
+
+            <span class="popular-series-icon glyphicon glyphicon-share"></span>
+            <h2><%= serie["name"] %> (<%= serie["first_air_date"] %>)</h2>
+            <%if (serie.backdrop_path == null) {%>
+            <img src="https://placehold.it/300x169/000000/000000">
+            <%}else{%>
+            <img src="https://image.tmdb.org/t/p/w300<%= serie["backdrop_path"] %>">
+            <%}%>
+        </a>
+    </div>
+    <% }) %>
+</div>
+
+<% include partials/footer %>

@@ -3,33 +3,112 @@
 <body>
 <% include partials/header %>
 
-<div class="container">
+<div class="container-fluid">
 
-    <div class="search-form">
+    <div class="row parallax-chart">
 
-        <form action="/search" method="GET">
+        <div class="col-md-12 slider-text">
             <div class="row">
-                <div class="col l11 m11">
-                    <input type="text" name="title" placeholder="Search....">
-                </div>
-                <div class="col l1 m1 ">
-                    <button class="btn waves-effect waves-light">Search
-                        <i class="material-icons right">send</i>
-                    </button>
-                </div>
-            </div>
-        </form>
-    </div>
+            <div class="col-sm-6 col-md-offset-3">
+                <form class="input-group" action="/search" method="GET">
 
-    <div class="row">
-        <% series["results"].forEach(function(serie){ %>
-        <div class="display-result">
-            <h2><%= serie["name"] %> (<%= serie["first_air_date"] %>)</h2>
-            <a href="/serie/<%= serie["id"] %>">
-                <img src="https://image.tmdb.org/t/p/w500<%= serie["poster_path"] %>">
-            </a>
+                    <input class="form-control" type="text" name="title" placeholder="Search....">
+                    <span class="input-group-btn">
+                    <button class="btn btn-primary">Search
+                    </button>
+                </span>
+
+                </form>
+            </div>
+            </div>
+            <div class="row">
+            <h1 class="cursive">Serify - Track Your Series</h1>
+
+            <a href="/login" class="btn btn-slider">Log In </a>
+            <a href="/login" class="btn btn-slider">Or Register</a>
+            </div>
         </div>
-        <% }) %>
+
+    </div>
+    <div class="container">
+        <div class="row popular-series">
+            <div class="col-sm-10 col-sm-offset-1 popular-series-box">
+                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                Most Popular
+                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+            </div>
+            <div class="col-sm-12 owl-carousel">
+                <% popular["results"].forEach(function(serie){ %>
+                <div class="series-slide">
+
+                    <a href="/serie/<%= serie["id"] %>">
+                        <span class="popular-series-icon glyphicon glyphicon-share"></span>
+                        <img src="https://image.tmdb.org/t/p/w500<%= serie["poster_path"] %>">
+                    </a>
+                </div>
+                <% }) %>
+            </div>
+            <div class="col-sm-10 col-sm-offset-1 popular-series-box">
+                <h3>&nbsp;</h3>
+            </div>
+        </div>
+
+        <div class="row popular-series mt">
+            <div class="col-sm-10 col-sm-offset-1 popular-series-box">
+                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                Top Rated
+                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+            </div>
+            <div class="col-sm-12 owl-carousel">
+                <% topRated["results"].forEach(function(serie){ %>
+                <div class="series-slide">
+
+                    <a href="/serie/<%= serie["id"] %>">
+                        <span class="popular-series-icon glyphicon glyphicon-share"></span>
+                        <img src="https://image.tmdb.org/t/p/w500<%= serie["poster_path"] %>">
+                    </a>
+                </div>
+                <% }) %>
+            </div>
+            <div class="col-sm-10 col-sm-offset-1 popular-series-box">
+                <h3>&nbsp;</h3>
+            </div>
+        </div>
+
+        <div class="row popular-series mt">
+            <div class="col-sm-10 col-sm-offset-1 popular-series-box">
+                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                Newly Series
+                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+            </div>
+            <div class="col-sm-12 owl-carousel">
+                <% discover["results"].forEach(function(serie){ %>
+                <div class="series-slide">
+
+                    <a href="/serie/<%= serie["id"] %>">
+                        <span class="popular-series-icon glyphicon glyphicon-share"></span>
+                        <img src="https://image.tmdb.org/t/p/w500<%= serie["poster_path"] %>">
+                    </a>
+                </div>
+                <% }) %>
+            </div>
+            <div class="col-sm-10 col-sm-offset-1 popular-series-box">
+                <h3>&nbsp;</h3>
+            </div>
+        </div>
+
     </div>
 
 </div>
