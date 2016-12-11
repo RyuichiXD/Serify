@@ -34,7 +34,7 @@ exports.setTrackedSession = function (req,res) {
         {
             // update the tracking
             track.num_of_ratings = req.body.num_of_ratings ;
-            track.seen_episodes = req.body.seen_episodes
+            track.seen_episodes = req.body.seen_episodes //TODO: hinzufügen nicht ersetzen
 
             track.save(function(err) {
                 if (err)
@@ -42,7 +42,7 @@ exports.setTrackedSession = function (req,res) {
                     console.log("Fehler beim speichern der Tracksesion "+ err);
                 }
                 else
-                    console.log("Tracksesion exestiert und wurde upgedated");
+                    console.log("Tracksesion exestiert und wurde upgedated" + track);
             });
 
             res.sendStatus(200)
@@ -62,7 +62,7 @@ exports.deleteTrackedSession = function (req,res) {
 
         if(!tracking.length)
         {
-            console.log("Tracksesion(s) gefunden");
+            console.log("Tracksesion(s) gefunden" + tracking);
             res.sendStatus(200);
         }
         else

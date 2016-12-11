@@ -8,6 +8,11 @@ body {
     color:white;
 }
 
+button {
+    background: none;
+    border: none;
+}
+
 .mt {
     margin-top: 50px !important;
 }
@@ -256,7 +261,7 @@ text-align: center;
     padding-top: 30px;
 }
 
-.serie-header-like span{
+.serie-header-like > button> span{
     text-align:center;
     font-size:60px;
     background-color: #1d9b6c;
@@ -269,7 +274,7 @@ text-align: center;
     transition: all 0.9s ease 0s;
 }
 
-.serie-header-like span:hover {
+.serie-header-like > button:hover span {
     background-color: #42dca3;
     transform: scale(1.1) rotate(360deg);
 }
@@ -283,5 +288,7 @@ text-align: center;
     background-color: transparent;
     border-color: transparent;
 }
+
+
 
 

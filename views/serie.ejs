@@ -17,7 +17,9 @@
             <a href="/login" class="btn btn-slider"><%= serie.genres[0].name %></a>
         </div>
         <div class="col-sm-2 serie-header-like">
+            <button type='button' data-button='{"user_id": "1","movie_id": "<%= serie.id %>"}'>
             <span class="glyphicon glyphicon-heart"></span>
+            </button>
         </div>
     </div>
     <div class="container">
@@ -50,7 +52,12 @@
                     <h2>Season: <%= season["season_number"] %> (<%= season["air_date"] %>)</h2>
                     <ul class="list-group">
                         <% for(var i = 1; i <= season.episode_count; i++) { %>
-                        <li class="list-group-item">Episode <%= [i] %></li>
+                        <li class="list-group-item">
+                            <label>Episode <%= [i] %>
+                                <input type="checkbox" value='{"user_id": "1","movie_id": "<%= serie.id %>","seen_episodes": [<%= season.season_number %>.<%= [i] %>]}'>
+                            </label>
+
+                        </li>
                         <% } %>
 
                     </ul>
@@ -64,3 +71,21 @@
 </div>
 
 <% include partials/footer %>
+<script>
+    $('button').click(function(){
+        var data = $.parseJSON($(this).attr('data-button'));
+
+        $.post("/setTracking", data);
+    });
+    $('input:checkbox').change(function(){
+//       var data1 = $.parseJSON($(this).val());
+        var data1 = $.parseJSON($(this).val());
+       if($(this).is(':checked')){
+
+           $.post("/setTracking", data1);
+       }else {
+           $.post("/removeTracking", data1);
+       }
+
+    });
+</script>
