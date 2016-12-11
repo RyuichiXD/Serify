@@ -21,16 +21,20 @@ exports.post = function (req,res) {
         //check if email or username in database
         if(!user.length)
         {
-            var user = new User(req.body);
-            user.save();
-            res.jsonp(user);
-            console.log(req.body.username+" geadded");
-
+            var newUser = new User(req.body);
+            newUser.save(function(err) {
+                if (err)
+                    console.log(err);
+                else
+                    console.log(req.body.username+" created!");
+            });
+            res.sendStatus(200)
         }
         else
         {
             console.log("Profil exisistert bereits");
             console.log(req.body);
+            res.sendStatus(200)
         }
     })
 
@@ -49,10 +53,13 @@ exports.check = function (req,res) {
         if(!user.length)
         {
             console.log("Profil nicht gefunden");
+            res.sendStatus(404)
         }
         else
         {
             console.log("Profil gefunden");
+            res.sendStatus(200)
         }
+
     })
 }

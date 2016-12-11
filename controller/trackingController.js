@@ -4,43 +4,117 @@
 
 var schemaTracking = require('../models/tracking');
 
-var Tracking = schemaTracking.user;
+var Tracking = schemaTracking.tracking;
 
 
-//Add User in db
+//Add Movie Tracking in db
 //if post is used in form, this function is going to execute
 exports.setTrackedSession = function (req,res) {
     //ToDo req.get(user_id) prüfen
-    var track = new Tracking(req.body);
-
-    track.save(function(err) {
-        if (err) throw err;
-
-        console.log('User created!');
-    });
-    res.jsonp(track);
-
-    console.log(req.body.username+" geadded");
-
-
-}
-
-//Check if user exist
-exports.getTrackedSession = function (req,res) {
-    console.log("getting Tracked Session")
-    Tracking.find({user_id: req.body.user_id,movie_id: req.body.movie_id},function (err,user) {
+    Tracking.findOne({user_id: req.body.user_id,movie_id: req.body.movie_id},function (err,track) {
         if (err)
         {
             console.log("Fehler beim finden der Tracksesion "+ err);
         }
 
-        if(!user.length)
+        if(!track)
         {
-            console.log("Tracksesion nicht gefunden");
+            var newTrack = new Tracking(req.body);
+            newTrack.save(function(err) {
+                if (err)
+                    console.log(err);
+                else
+                    console.log('Track created!');
+            });
+            res.jsonp(newTrack);
+
+            console.log("user:"+ req.body.user_id +" movie:"+ req.body.movie_id +" inserted");
         }
         else
         {
-            console.log("Tracksesion gefunden");
+            // update the tracking
+            track.num_of_ratings = req.body.num_of_ratings ;
+            track.seen_episodes = req.body.seen_episodes
+
+            track.save(function(err) {
+                if (err)
+                {
+                    console.log("Fehler beim speichern der Tracksesion "+ err);
+                }
+                else
+                    console.log("Tracksesion exestiert und wurde upgedated");
+            });
+
+            res.sendStatus(200)
         }
-    })
+    });
+
+}
+
+//Delete a session
+exports.deleteTrackedSession = function (req,res) {
+    console.log("getting Tracked Session")
+    Tracking.remove({user_id: req.body.user_id,movie_id: req.body.movie_id},function (err,tracking) {
+        if (err)
+        {
+            console.log("Fehler beim finden der Tracksesion "+ err);
+        }
+
+        if(!tracking.length)
+        {
+            console.log("Tracksesion(s) gefunden");
+            res.sendStatus(200);
+        }
+        else
+        {
+            console.log("Tracksesion nicht gefunden");
+            res.sendStatus(404);
+        }
+    });
+}
+
+//Get a Session
+exports.getTrackedSession = function (req,res) {
+    console.log("getting Tracked Session")
+    Tracking.find({user_id: req.body.user_id,movie_id: req.body.movie_id},function (err,trackings) {
+        if (err)
+        {
+            console.log("Fehler beim finden der Tracksesion "+ err);
+        }
+
+        if(!trackings.length)
+        {
+            console.log("Tracksesion nicht gefunden");
+            res.sendStatus(404)
+        }
+        else
+        {
+            console.log("Tracksesion(s) gefunden");
+            //res.sendStatus(200);
+            res.send(trackings);
+        }
+    });
+}
+
+// get all Trackings of an user
+exports.getAllTrackingsOfUser = function (req,res) {
+    console.log("getting Tracked Session")
+    Tracking.find({user_id: req.body.user_id},function (err,trackings) {
+        if (err)
+        {
+            console.log("Fehler beim finden der Tracksesion "+ err);
+        }
+
+        if(!trackings.length)
+        {
+            console.log("Filme nicht gefunden");
+            res.sendStatus(404)
+        }
+        else
+        {
+            console.log("Tracksesion(s) gefunden");
+            //res.sendStatus(200);
+            res.send(trackings);
+        }
+    });
 }
