@@ -9,7 +9,7 @@ exports.getSearch = function(req, res){
     request(url, function(error, response, body){
         if(!error && response.statusCode == 200){
             var series = JSON.parse(body);
-            res.render("result", {series:series});
+            res.render("result", {series:series, user: req.session.user});
         }
     });
 };

@@ -13,6 +13,7 @@ const trackingController = require('../controller/trackingController');
 
 module.exports = function(app) {
 
+    //session middleware
     app.use(function(req, res, next) {
         res.locals.user = null;
         if (req.session && req.session.user) {
@@ -33,7 +34,7 @@ module.exports = function(app) {
     app.get("/search", searchController.getSearch);
     app.get("/serie/:serien_id",seriesController.getSerie);
     //User controll
-    app.get("/login", usersController.getLogin);
+    app.get("/logout", usersController.getLogout);
     app.post("/login/check", usersController.check);
     app.post('/login/register', usersController.post);
     //Tracking control

@@ -6,7 +6,7 @@ exports.getSerie = function(req, res){
     request(url, function(error, response, body){
         if(!error && response.statusCode == 200){
             var serie = JSON.parse(body);
-            res.render("serie", {serie:serie});
+            res.render("serie", {serie:serie, user: req.session.user});
         }
     });
 };

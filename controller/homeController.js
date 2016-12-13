@@ -29,6 +29,6 @@ exports.getHome = wrap(function * (req, res) {
         popular: popular,
         topRated: topRated,
         discover: discover,
-        user: username
+        user: req.session.user
     });
 });

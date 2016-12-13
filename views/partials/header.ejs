@@ -6,17 +6,23 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Serify</a>
+            <a class="navbar-brand" href="/">Serify</a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li><a href="#">Favorites</a></li>
+                <li><a href="#">Download App</a></li>
             </ul>
+            <% if(user){ %>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> <%=user%></a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li><a href="/"><span class="glyphicon glyphicon-user"></span> <%= user.username %></a></li>
+                <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul>
+            <% }else{%>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li><a href="/#login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            </ul>
+            <%}%>
         </div>
     </div>
 </nav>

@@ -17,3 +17,11 @@ $(document).ready(function () {
             '<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>']
     });
 });
+
+$(document).ready(function() {
+
+    if(window.location.href.indexOf('#login') != -1) {
+        $('#login').modal('show');
+    }
+
+});

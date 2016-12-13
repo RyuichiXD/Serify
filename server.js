@@ -5,14 +5,15 @@ var router = require('./route/allRoutes');
 var mongoose = require('mongoose');
 var sessions = require('client-sessions');
 
+
 var app = express();
 
 //used for user auth.
 app.use(sessions({
     cookieName: 'session',
     secret: '1234567890',
-    duration: 30 * 60* 1000,
-    activeDuration: 5 * 60 * 1000,
+    duration: 24 * 60 * 60 * 1000,//1 day
+    activeDuration: 90 * 60 * 1000,//90 min
 }));
 
 //use to get get/post request as an object
@@ -42,6 +43,8 @@ router(app);
 
 app.get('/test', function (req, res) {
     console.log(req.session.user);
+    console.log("Typ: " + typeof req.session.user);
+    console.log(req.session.user === undefined);
     res.render("example");
 });
 // Start listening to server

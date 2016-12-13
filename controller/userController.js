@@ -5,9 +5,10 @@ var schema = require('../models/user');
 
 var User = schema.user;
 
-exports.getLogin = function (req,res) {
+exports.getLogout = function (req,res) {
 
-    res.render("login");
+    req.session.reset();
+    res.redirect("/");
 
 }
 
@@ -30,7 +31,8 @@ exports.post = function (req,res) {
                 else
                     console.log(req.body.username+" created!");
             });
-            res.sendStatus(200)
+            res.sendStatus(200);
+            res.redirect("/");
         }
         else
         {
@@ -58,7 +60,7 @@ exports.check = function (req,res) {
         {
             console.log("Profil gefunden" + typeof Number(user._id));
             // res.cookie("serifyCookie", String(user._id));
-            req.session.user = user.username;
+            req.session.user = user;
             res.redirect("/");
             console.log("Session: " + req.session.user);
 
