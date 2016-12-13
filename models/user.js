@@ -19,5 +19,3 @@ var User = mongoose.model('users', userSchema);
 exports.user = User;
 
 
-// todo Session key ? Clemens fragen
-

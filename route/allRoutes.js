@@ -1,10 +1,33 @@
+var schema = require('../models/user');
+
+var User = schema.user;
+
+
 const usersController = require('../controller/userController');
 const homeController = require('../controller/homeController');
 const searchController = require('../controller/searchController');
 const seriesController = require('../controller/seriesController');
 const trackingController = require('../controller/trackingController');
 
+
+
 module.exports = function(app) {
+
+    app.use(function(req, res, next) {
+        res.locals.user = null;
+        if (req.session && req.session.user) {
+            User.findOne({email: req.session.user.email}, function(err, user){
+                if (user) {
+                    req.user = user;
+                    delete req.user.password;
+                    req.session.user = req.user;
+                    res.locals.user = user;
+                }
+                next();
+            })
+        }
+        else next();
+    });
 
     app.get("/", homeController.getHome);
     app.get("/search", searchController.getSearch);

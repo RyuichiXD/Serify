@@ -94,9 +94,18 @@ button {
     transition: all .35s
 }
 
-.btn-slider:hover {
+.btn-slider:hover, .btn-slider:focus {
     color: white;
 }
+
+.modal {
+    color:black;
+}
+
+#email, #pwd{
+    color:black;
+}
+
 
 .slider-text {
     text-align: center;

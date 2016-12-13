@@ -6,7 +6,9 @@ var schema = require('../models/user');
 var User = schema.user;
 
 exports.getLogin = function (req,res) {
+
     res.render("login");
+
 }
 
 //Add User in db
@@ -43,22 +45,23 @@ exports.post = function (req,res) {
 //Check if user exist
 //TODO: Do something when logged in (res.render Dashbord)
 exports.check = function (req,res) {
+    let options = {
+        maxAge: 1000 * 60 * 15 // would expire after 15 minutes
+    }
     console.log("check user-login")
-    User.find({ email: req.body.email, password: req.body.password},function (err,user) {
+    User.findOne({ email: req.body.email, password: req.body.password},function (err,user) {
         if (err)
         {
             console.log("Fehler beim finden des users "+ err);
         }
+        if(user)
+        {
+            console.log("Profil gefunden" + typeof Number(user._id));
+            // res.cookie("serifyCookie", String(user._id));
+            req.session.user = user.username;
+            res.redirect("/");
+            console.log("Session: " + req.session.user);
 
-        if(!user.length)
-        {
-            console.log("Profil nicht gefunden");
-            res.sendStatus(404)
-        }
-        else
-        {
-            console.log("Profil gefunden");
-            res.sendStatus(200)
         }
 
     })

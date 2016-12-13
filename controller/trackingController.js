@@ -34,7 +34,7 @@ exports.setTrackedSession = function (req,res) {
         {
             // update the tracking
             track.num_of_ratings = req.body.num_of_ratings ;
-            track.seen_episodes = req.body.seen_episodes //TODO: hinzufügen nicht ersetzen
+            track.seen_episodes.push(req.body.seen_episodes);
 
             track.save(function(err) {
                 if (err)
@@ -114,7 +114,7 @@ exports.getAllTrackingsOfUser = function (req,res) {
         {
             console.log("Tracksesion(s) gefunden");
             //res.sendStatus(200);
-            res.send(trackings);
+            res.render("dashbord", {trackings: trackings});
         }
     });
 }

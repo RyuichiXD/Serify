@@ -22,10 +22,13 @@ exports.getHome = wrap(function * (req, res) {
     const popular = yield getPopular();
     const topRated = yield getTopRated();
     const discover = yield getDiscover();
+    var username = req.session.user;
+    console.log(req.session.user);
 
     res.render("home", {
         popular: popular,
         topRated: topRated,
-        discover: discover
+        discover: discover,
+        user: username
     });
 });
