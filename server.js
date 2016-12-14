@@ -4,9 +4,18 @@ var request = require("request");
 var router = require('./route/allRoutes');
 var mongoose = require('mongoose');
 var sessions = require('client-sessions');
+var https = require('https');
+var fs = require('fs');
 
 
 var app = express();
+
+//keys for https
+var options = {
+    key: fs.readFileSync('./keys/key.pem'),
+    cert: fs.readFileSync('./keys/cert.cert')
+
+};
 
 //used for user auth.
 app.use(sessions({
@@ -47,7 +56,13 @@ app.get('/test', function (req, res) {
     console.log(req.session.user === undefined);
     res.render("example");
 });
+
+//https service
+https.createServer(options, app).listen(3000, function () {
+    console.log("The HTTPS server has started on port 3000 - visit https://localhost:3000/");
+});
+
 // Start listening to server
-app.listen(3000, function(){
-    console.log("The server has started on port 3000");
-})
+// app.listen(3000, function(){
+//     console.log("The server has started on port 3000");
+// })
