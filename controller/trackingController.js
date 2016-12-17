@@ -10,7 +10,9 @@ var Tracking = schemaTracking.tracking;
 //Add Movie Tracking in db
 //if post is used in form, this function is going to execute
 exports.setTrackedSession = function (req,res) {
-    //ToDo req.get(user_id) prüfen
+
+    let seenEpisodes =  req.body.seen_episodes;
+
     Tracking.findOne({user_id: req.body.user_id,movie_id: req.body.movie_id},function (err,track) {
         if (err)
         {
@@ -34,21 +36,45 @@ exports.setTrackedSession = function (req,res) {
         {
             // update the tracking
             track.num_of_ratings = req.body.num_of_ratings ;
-            track.seen_episodes.push(req.body.seen_episodes);
+            // check if the episode is already in array
+            if(!(track.seen_episodes.indexOf(seenEpisodes) > -1))
+            {   // add episode
+                track.seen_episodes.push(seenEpisodes);
 
-            track.save(function(err) {
-                if (err)
+                track.save(function(err) {
+                    if (err)
+                    {
+                        console.log("Fehler beim speichern der Tracksesion "+ err);
+                    }
+                    else
+                        console.log("Tracksesion exestiert und wurde upgedated" + track);
+                });
+            }
+            else
                 {
-                    console.log("Fehler beim speichern der Tracksesion "+ err);
+                    //remove track
+                    var index =  track.seen_episodes.indexOf(seenEpisodes);
+                    if(index != -1)
+                    {
+                        track.seen_episodes.splice(index, 1);
+                        track.save(function(err) {
+                            if (err)
+                            {
+                                console.log("Fehler beim speichern der Tracksesion "+ err);
+                            }
+                            else
+                                console.log("Tracksesion exestiert und wurde entfernt" + track);
+                        });
+                    }
+                    else
+                    {
+                        console.log("Gesehene Episode wurden nicht gefunden");
+                        res.sendStatus(404);
+                    }
                 }
-                else
-                    console.log("Tracksesion exestiert und wurde upgedated" + track);
-            });
-
             res.sendStatus(200)
         }
     });
-
 }
 
 //Delete a session
