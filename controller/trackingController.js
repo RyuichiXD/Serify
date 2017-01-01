@@ -179,8 +179,3 @@ exports.getAllTrackingsOfUser = function (req,res) {
         }
     })
 }
-
-function LinkToBinary(link,type)
-{
-
-}
