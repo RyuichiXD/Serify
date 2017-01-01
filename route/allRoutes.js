@@ -40,6 +40,6 @@ module.exports = function(app) {
     //Tracking control
     app.post("/setTracking",trackingController.setTrackedSession);
     app.post("/getTrackings",trackingController.getTrackedSession);
-    app.post("/dashboard",trackingController.getAllTrackingsOfUser);
+    app.get("/dashboard",trackingController.getAllTrackingsOfUser);
     app.post("/removeTracking",trackingController.deleteTrackedSession);
 };

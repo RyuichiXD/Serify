@@ -17,4 +17,17 @@
     </form>
 </div>
 
+<!-- Ausgabe Season Image -->
+<% trackings.forEach(function(track,index){ %>
+<p><%= index %></p>
+<img id=<%= index %> src="data:image/jpeg;base64,<%=  new Buffer(track.season_img.data, 'hex').toString('base64') %>" />
+<% }) %>
+
+<!-- Ausgabe Poser Image -->
+<% trackings.forEach(function(track,index){ %>
+<p><%= index %></p>
+<img id=<%= index %> src="data:image/jpeg;base64,<%=  new Buffer(track.poster_img.data, 'hex').toString('base64') %>" />
+
+<% }) %>
+
 <% include partials/footer %>

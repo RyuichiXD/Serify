@@ -1,7 +1,7 @@
 /**
  * Created by Samy on 06.11.2016.
  */
-
+var request = require('request');
 var schemaTracking = require('../models/tracking');
 
 var Tracking = schemaTracking.tracking;
@@ -18,16 +18,49 @@ exports.setTrackedSession = function (req,res) {
         {
             console.log("Fehler beim finden der Tracksesion "+ err);
         }
-
+            //Track not found -> create a new one
         if(!track)
         {
             var newTrack = new Tracking(req.body);
-            newTrack.save(function(err) {
-                if (err)
-                    console.log(err);
-                else
-                    console.log('Track created!');
+
+            //########################### Todo replace URL with req.body.season_img
+
+            request({
+                url: 'https://image.tmdb.org/t/p/w300_and_h450_bestv2/nHXiMnWUAUba2LZ0dFkNDVdvJ1o.jpg',
+                encoding: null
+            }, function(error, response, body) {
+                if (!error && response.statusCode === 200) {
+                    body = new Buffer(body, 'binary');
+
+                    newTrack.season_img.data = body;
+                    newTrack.season_img.contentType = 'image/jpg';
+
+
+                    //Todo replace URL with req.body.poster_img
+                    request({
+                        url: 'https://image.tmdb.org/t/p/w300_and_h450_bestv2/2vQYBy5lbqSVaMP02P2IDpCrdIy.jpg',
+                        encoding: null
+                    }, function(error, response, body) {
+                        if (!error && response.statusCode === 200) {
+                            body = new Buffer(body, 'binary');
+
+                            newTrack.poster_img.data = body;
+                            newTrack.poster_img.contentType = 'image/jpg';
+
+                            newTrack.save(function(err) {
+                                if (err)
+                                    console.log(err);
+                                else
+                                    console.log('Track created!');
+                            });
+                        }
+                    });
+                }
             });
+            //###########################
+
+
+            //save in db
             res.jsonp(newTrack);
 
             console.log("user:"+ req.body.user_id +" movie:"+ req.body.movie_id +" inserted");
@@ -125,7 +158,9 @@ exports.getTrackedSession = function (req,res) {
 // get all Trackings of an user
 exports.getAllTrackingsOfUser = function (req,res) {
     console.log("getting Tracked Session")
-    Tracking.find({user_id: req.body.user_id},function (err,trackings) {
+    //ToDo keine statischen daten
+    //Tracking.find({user_id: req.body.user_id},function (err,trackings) {
+    Tracking.find({user_id: 1},function (err,trackings) {
         if (err)
         {
             console.log("Fehler beim finden der Tracksesion "+ err);
@@ -140,7 +175,12 @@ exports.getAllTrackingsOfUser = function (req,res) {
         {
             console.log("Tracksesion(s) gefunden");
             //res.sendStatus(200);
-            res.render("dashbord", {trackings: trackings});
+            res.render("dashboard", {trackings: trackings});
         }
-    });
+    })
+}
+
+function LinkToBinary(link,type)
+{
+
 }
