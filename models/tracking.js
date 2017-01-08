@@ -12,7 +12,7 @@ var TrackingSchema = new mongoose.Schema({
     seen_episodes: [{type: String}],
     season_img: {data: Buffer, contentType: String},
     poster_img: {data: Buffer, contentType: String},
-    // ToDo description: {type: String, default: "Beschreibung vom Film"}
+    move_description: {type: String,  default: "-"},
     createdAt: { type : Date, default : Date.now }
 });
 //name of collection in the db

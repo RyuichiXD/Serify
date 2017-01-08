@@ -14,7 +14,6 @@ exports.getLogout = function (req,res) {
 
 //Add User in db
 //if post is used in form, this function is going to execute
-//TODO: add res.render to something(?)
 exports.post = function (req,res) {
     User.find({$or:[ {email: req.body.email}, {username: req.body.username}]},function (err,user) {
         if (err)
@@ -45,7 +44,6 @@ exports.post = function (req,res) {
 }
 
 //Check if user exist
-//TODO: Do something when logged in (res.render Dashbord)
 exports.check = function (req,res) {
     let options = {
         maxAge: 1000 * 60 * 15 // would expire after 15 minutes

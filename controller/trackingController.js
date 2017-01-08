@@ -23,10 +23,10 @@ exports.setTrackedSession = function (req,res) {
         {
             var newTrack = new Tracking(req.body);
 
-            //########################### Todo replace URL with req.body.season_img
+            //###################### store body.season_img in mongo db
 
             request({
-                url: 'https://image.tmdb.org/t/p/w300_and_h450_bestv2/nHXiMnWUAUba2LZ0dFkNDVdvJ1o.jpg',
+                url: req.body.season_img,
                 encoding: null
             }, function(error, response, body) {
                 if (!error && response.statusCode === 200) {
@@ -36,9 +36,9 @@ exports.setTrackedSession = function (req,res) {
                     newTrack.season_img.contentType = 'image/jpg';
 
 
-                    //Todo replace URL with req.body.poster_img
+                    // store poster_img in mongo db
                     request({
-                        url: 'https://image.tmdb.org/t/p/w300_and_h450_bestv2/2vQYBy5lbqSVaMP02P2IDpCrdIy.jpg',
+                        url: req.body.poster_img,
                         encoding: null
                     }, function(error, response, body) {
                         if (!error && response.statusCode === 200) {
@@ -57,9 +57,7 @@ exports.setTrackedSession = function (req,res) {
                     });
                 }
             });
-            //###########################
-
-
+            
             //save in db
             res.jsonp(newTrack);
 
@@ -158,9 +156,8 @@ exports.getTrackedSession = function (req,res) {
 // get all Trackings of an user
 exports.getAllTrackingsOfUser = function (req,res) {
     console.log("getting Tracked Session")
-    //ToDo keine statischen daten
-    //Tracking.find({user_id: req.body.user_id},function (err,trackings) {
-    Tracking.find({user_id: 1},function (err,trackings) {
+
+    Tracking.find({user_id: req.body.user_id},function (err,trackings) {
         if (err)
         {
             console.log("Fehler beim finden der Tracksesion "+ err);
