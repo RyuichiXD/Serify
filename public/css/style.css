@@ -54,9 +54,26 @@ button {
     color: #f4f4f4
 }
 
-.affix {
+
+
+#nav.affix {
+
     background-color: #111;
 }
+
+.search.affix{
+    position: fixed;
+    width: 65%;
+    top:50px;
+    z-index: 1000;
+}
+
+.searchfield.affix{
+   background-color: white;
+    opacity: 0.7;
+}
+
+
 
 .navbar-toggle > span {
     background-color: white;
@@ -156,6 +173,62 @@ button {
 .series-slide img {
     width: 100%;
     filter: brightness(83%);
+    border-color: white;
+
+}
+.series-slide p{
+   display: none;
+
+}
+
+
+@media only screen and (max-width: 767px) {
+
+    .series-slide img{
+        padding:3px;
+        border:1px solid #021a40;
+        background-color: #ffffff;
+    }
+
+    .popular-series-icon{
+        display:none;
+    }
+
+    .series-slide p{
+        text-align: center;
+        display: block;
+    }
+
+    .serie-header-like {
+        text-align: center;
+        z-index: 999;
+        padding-top: 30px;
+    }
+
+    .serie-header-like > button> span{
+        top:-120px;
+        background-color: #ff4222; /*???????*/
+    }
+
+    .nav> li> a {
+        background-color: #111;
+    }
+    .nav> li> a:hover
+    {
+        background-color: #111;
+    }
+
+}
+
+@media only screen and (max-width: 991px) {
+
+    .popular-series-icon{
+        display:none;
+    }
+
+    #goTop{
+        visibility: hidden;
+    }
 }
 
 .popular-series {
@@ -171,6 +244,9 @@ button {
     font-size: 28px;
     font-weight:bold;
     padding: 15px;
+}
+.owl-stage{
+
 }
 
 .popular-series-box span {
@@ -298,6 +374,10 @@ text-align: center;
     border-color: transparent;
 }
 
+#goTop.affix {
+    position: fixed;
+    bottom: 18px;
+    left: 10px;
 
-
+}
 
