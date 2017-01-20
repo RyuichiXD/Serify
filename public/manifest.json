@@ -1,0 +1,13 @@
+{
+  "name": "Serify",
+  "short_name": "Serify",
+  "icons": [{
+    "src": "img/logo_255.png",
+    "sizes": "255x255",
+    "type": "image/png"
+  }],
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#11111",
+  "theme_color": "#1d9b6c"
+}

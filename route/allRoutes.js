@@ -8,6 +8,7 @@ const homeController = require('../controller/homeController');
 const searchController = require('../controller/searchController');
 const seriesController = require('../controller/seriesController');
 const trackingController = require('../controller/trackingController');
+const downloadController = require('../controller/downloadController');
 
 
 
@@ -33,6 +34,7 @@ module.exports = function(app) {
     app.get("/", homeController.getHome);
     app.get("/search", searchController.getSearch);
     app.get("/serie/:serien_id",seriesController.getSerie);
+    app.get("/download", downloadController.getDownload);
     //User controll
     app.get("/logout", usersController.getLogout);
     app.post("/login/check", usersController.check);

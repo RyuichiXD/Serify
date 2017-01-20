@@ -107,7 +107,6 @@
             <div class="col-sm-12 owl-carousel">
                 <% popular["results"].forEach(function(serie){ %>
                 <div class="series-slide">
-
                     <a href="/serie/<%= serie["id"] %>">
                         <span class="popular-series-icon glyphicon glyphicon-share"></span>
                         <img src="https://image.tmdb.org/t/p/w500<%= serie["poster_path"] %>">
@@ -131,6 +130,7 @@
                 <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
             </div>
             <div class="col-sm-12 owl-carousel">
+
                 <% topRated["results"].forEach(function(serie){ %>
                 <div class="series-slide">
 
