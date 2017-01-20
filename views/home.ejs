@@ -9,11 +9,12 @@
 
         <div class="col-md-12 slider-text">
             <div class="row">
-                <div class="col-sm-6 col-md-offset-3">
-                    <form class="input-group" action="/search" method="GET">
+                <div class="col-xs-8 col-xs-offset-2">
+                    <form class="input-group search" action="/search" method="GET" data-spy="affix" data-offset-top="520">
 
-                        <input class="form-control" type="text" name="title" placeholder="Search....">
+                        <input class="form-control searchfield" type="text" name="title" data-spy="affix" data-offset-top="520"  placeholder="Search....">
                         <span class="input-group-btn">
+
                     <button class="btn btn-primary">Search
                     </button>
                 </span>
@@ -110,6 +111,7 @@
                     <a href="/serie/<%= serie["id"] %>">
                         <span class="popular-series-icon glyphicon glyphicon-share"></span>
                         <img src="https://image.tmdb.org/t/p/w500<%= serie["poster_path"] %>">
+                        <p><%= serie.name %></p>
                     </a>
                 </div>
                 <% }) %>
@@ -137,13 +139,14 @@
                     <a href="/serie/<%= serie["id"] %>">
                         <span class="popular-series-icon glyphicon glyphicon-share"></span>
                         <img src="https://image.tmdb.org/t/p/w500<%= serie["poster_path"] %>">
+                        <p><%= serie.name %></p>
                     </a>
                 </div>
                 <% }) %>
             </div>
-            <div class="col-sm-10 col-sm-offset-1 popular-series-box">
+            <!--<div class="col-sm-10 col-sm-offset-1 popular-series-box">
                 <h3>&nbsp;</h3>
-            </div>
+            </div>-->
         </div>
 
         <div class="row popular-series mt">
@@ -163,16 +166,22 @@
                     <a href="/serie/<%= serie["id"] %>">
                         <span class="popular-series-icon glyphicon glyphicon-share"></span>
                         <img src="https://image.tmdb.org/t/p/w500<%= serie["poster_path"] %>">
+                        <p><%= serie.name %></p>
+
                     </a>
                 </div>
                 <% }) %>
             </div>
-            <div class="col-sm-10 col-sm-offset-1 popular-series-box">
+           <!-- <div class="col-sm-10 col-sm-offset-1 popular-series-box">
                 <h3>&nbsp;</h3>
-            </div>
+            </div>-->
         </div>
 
     </div>
+    <span id="goTop" class="hidden" data-spy="affix" data-offset-top="2">
+    <a href="#top" class="well well-sm"  onclick="$('html,body').animate({scrollTop:0},'slow');return false;">
+        <i class="glyphicon glyphicon-chevron-up"></i> Back to Top
+    </a>
 
 </div>
 
