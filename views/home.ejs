@@ -14,7 +14,6 @@
 
                         <input class="form-control searchfield" type="text" name="title" data-spy="affix" data-offset-top="520"  placeholder="Search....">
                         <span class="input-group-btn">
-
                     <button class="btn btn-primary">Search
                     </button>
                 </span>
@@ -23,9 +22,17 @@
                 </div>
             </div>
             <div class="row">
-                <h1 class="cursive">Serify - Track Your Series
+                <h1 class="cursive">Serify - Track Your Series</h1>
+                <section class="subscription-details js-subscription-details is-invisible">
+                    <pre><code class="js-subscription-json"></code></pre>
+                </section>
 
-                </h1>
+
+
+
+
+
+                <button class="notificationBtn">Test</button>
                 <button type="button" class="btn btn-slider" data-toggle="modal" data-target="#login">Log In</button>
                 <div id="login" class="modal fade" role="dialog">
                     <div class="modal-dialog">
@@ -100,7 +107,7 @@
                 <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
                 <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
                 <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                Most Popular
+                <text>Most Popular</text>
                 <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
                 <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
                 <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
@@ -116,9 +123,9 @@
                 </div>
                 <% }) %>
             </div>
-            <div class="col-sm-10 col-sm-offset-1 popular-series-box">
+           <!-- <div class="col-sm-10 col-sm-offset-1 popular-series-box">
                 <h3>&nbsp;</h3>
-            </div>
+            </div>-->
         </div>
 
         <div class="row popular-series mt">
@@ -178,10 +185,12 @@
         </div>
 
     </div>
-    <span id="goTop" class="hidden" data-spy="affix" data-offset-top="2">
+
+<span id="goTop"  data-spy="affix" data-offset-top="550">
     <a href="#top" class="well well-sm"  onclick="$('html,body').animate({scrollTop:0},'slow');return false;">
         <i class="glyphicon glyphicon-chevron-up"></i> Back to Top
     </a>
+    </span>
 
 </div>
 

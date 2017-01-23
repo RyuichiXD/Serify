@@ -44,9 +44,6 @@ $(document).ready(function () {
     });
 });
 
-if ( ($(window).height() + 100) < $(document).height() ) {
-    $('#goTop').removeClass('hidden')
-}
 
 $("#accordion").on("shown.bs.collapse", function () {
     var scrol = $(this).find('.collapse.in');
@@ -64,3 +61,6 @@ $(document).ready(function() {
     }
 
 });
+
+
+
