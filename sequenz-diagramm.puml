@@ -1,0 +1,92 @@
+@startuml
+actor User
+
+participant "UI\n(Browser)" as UI
+
+box "Backend"
+participant "Node\n<<App-Server>>" as Node
+database "MongoDB\n<<Datenbank>>" as DB
+participant "TMDB\n<<Movie-Datenbank>>" as TMDB
+end box
+
+User -> UI: login
+activate User
+activate UI
+UI -> Node: authentication request
+activate Node
+Node -> DB: verify
+activate DB
+Node <-DB
+deactivate DB
+UI <- Node: authentication response
+deactivate Node
+User <- UI:
+deactivate UI
+deactivate User
+...
+
+User -> UI: search for series
+activate User
+activate UI
+UI -> Node: GET: /search?query
+activate Node
+Node -> TMDB: GET: /search/tv?query
+activate TMDB
+Node <- TMDB: search results
+deactivate TMDB
+Node -> Node: Render template
+UI <- Node
+deactivate Node
+User <- UI
+deactivate UI
+deactivate User
+...
+
+User -> User: start tracking
+activate User
+User -> UI: viewing details
+activate UI
+UI -> Node: GET: /series?id
+activate Node
+Node -> TMDB: GET: /tv?id
+activate TMDB
+Node <- TMDB: series details
+deactivate TMDB
+Node -> Node: Render template
+UI <- Node
+deactivate Node
+User <- UI
+deactivate UI
+
+User -> UI: click like button
+activate UI
+UI -> Node: POST: /setTracking?data
+activate Node
+Node -> DB: save user & series
+activate DB
+Node <- DB
+deactivate DB
+UI -> Node
+deactivate Node
+User <- UI
+deactivate UI
+
+User -> UI: track episode
+activate UI
+UI -> Node: POST: /setTracking?episode
+activate Node
+Node -> DB: save episode
+activate DB
+Node <- DB
+deactivate DB
+UI -> Node
+deactivate Node
+User <- UI
+deactivate UI
+
+
+deactivate User
+
+
+
+@enduml
